@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres salir conmigo?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #d63384;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            height: 50px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-yes {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background-color: #43a047;
+            transform: scale(1.05);
+        }
+
+        .btn-no {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+        }
+
+        /* Clase utilitaria para pantallas ocultas */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- PANTALLA 1 -->
+        <div id="step1">
+            <!-- Sticker de gatito pensando -->
+            <img id="gif1" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3N5Ym03cXN2OHI3eW90b290cjF6NXN0ZXFpOHp3b3Bjd3Zid3R0diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito">
+            <h2 id="question1">¿Tienes planes este fin de semana?</h2>
+            <div class="btn-container" style="align-items: center;">
+                <button class="btn-yes" onclick="nextStep(2)">No</button>
+                <button class="btn-no" id="btnNo" onmouseover="moveButton()">Sí</button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 2 -->
+        <div id="step2" class="hidden">
+            <!-- Sticker de gatito emocionado -->
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9scXdrYm9pY3g5b3I4bXN6cm95bms0cHZubmptb3RwY3V5MnV3NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/29bKyyjDKSfYt17d8o/giphy.gif" alt="Gatito Feliz">
+            <h2>¡Súper! Entonces, ¿qué prefieres?</h2>
+            <div class="btn-container">
+                <button class="btn-yes" style="background-color: #ff9800;" onclick="finalStep('un café ☕')">Ir por un café</button>
+                <button class="btn-yes" style="background-color: #e91e63;" onclick="finalStep('unos tacos 🌮')">Ir por unos tacos</button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3 (FINAL) -->
+        <div id="step3" class="hidden">
+            <!-- Sticker de celebración -->
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9wN3p5NDV6am96bXN4OHg0dmFwZHp0ZzVwYm9pZndpZzZ0ZzR3NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9G0Adw7u6K9f635DCO/giphy.gif" alt="Celebración">
+            <h2 id="finalMessage">¡Trato hecho!</h2>
+        </div>
+    </div>
+
+    <script>
+        // Cambiar de pantalla básica
+        function nextStep(step) {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+
+        // Pantalla final con texto personalizado
+        function finalStep(opcion) {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+            document.getElementById('finalMessage').innerText = `¡Trato hecho! Quedamos para ${opcion}. Paso por ti el sábado  ✨`;
+        }
+
+        // Hacer que el botón "No" (en este caso el 'Sí' tengo planes) se mueva solo
+        function moveButton() {
+            const btnNo = document.getElementById('btnNo');
+            // Calcula posiciones aleatorias dentro de la tarjeta
+            const x = Math.random() * 200 - 100; // Rango de movimiento en X
+            const y = Math.random() * 100 - 50;  // Rango de movimiento en Y
+            
+            btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+</html>
